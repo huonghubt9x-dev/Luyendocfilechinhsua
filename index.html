@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Học tiếng Nhật qua sách</title>
+
+
+  <style>
+
+    /* =========================
+       CÀI ĐẶT CHUNG
+    ========================= */
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+
+      background: #f1f8f2;
+
+      font-family:
+        Arial,
+        "MS PGothic",
+        "Hiragino Kaku Gothic ProN",
+	"Segoe UI Emoji", 
+	"Wingdings", 
+	"Noto Color Emoji", 
+        sans-serif;
+
+      color: #222;
+
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+
+    .japanese-app {
+
+      width: 100%;
+      max-width: none;
+
+      margin: 0;
+
+      padding: 30px 20px 60px;
+
+      box-sizing: border-box;
+
+    }
+
+
+    h1 {
+
+      text-align: center;
+
+      color: #2e7d32;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    h2 {
+
+      color: #2e7d32;
+
+      border-bottom: 2px solid #a5d6a7;
+
+      padding-bottom: 8px;
+
+      margin-top: 40px;
+
+    }
+
+
+    h3 {
+
+      text-align: center;
+
+      line-height: 1.8;
+
+    }
+
+
+    .subtitle {
+
+      text-align: center;
+
+      color: #666;
+
+      line-height: 1.8;
+
+      font-size: 20px;
+
+      font-weight: bold;
+
+    }
+
+
+    section {
+
+      background: white;
+
+      padding: 25px;
+
+      margin-top: 30px;
+
+      border-radius: 15px;
+
+      box-shadow:
+        0 4px 12px rgba(0,0,0,0.08);
+
+    }
+
+
+    button {
+
+      padding: 10px 20px;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background: #2e7d32;
+
+      color: white;
+
+      font-size: 16px;
+
+      cursor: pointer;
+
+      margin: 5px;
+
+    }
+
+
+    button:hover {
+
+      opacity: 0.85;
+
+    }
+
+
+    /* =========================
+       ĐOẠN VĂN TIẾNG NHẬT
+    ========================= */
+
+    .japanese-text {
+
+      font-size: 24px;
+
+      line-height: 2;
+
+    }
+
+
+    .japanese-paragraph {
+
+      text-indent: 1.5em;
+
+      margin-bottom: 25px;
+
+    }
+
+
+    /* Furigana */
+
+    .japanese-text rt {
+
+      font-size: 0.5em;
+
+      color: #2e7d32;
+
+      font-weight: bold;
+
+    }
+
+
+    /* Khi tắt furigana */
+
+    .japanese-text.hide-furigana rt {
+
+      visibility: hidden;
+
+    }
+
+
+    /* Nút furigana */
+
+    #furiganaButton {
+
+      margin-bottom: 15px;
+
+    }
+
+
+
+    /* =========================
+       BẢN DỊCH VIỆT / ANH
+    ========================= */
+
+    .translation-controls {
+
+      margin-top: 10px;
+
+      margin-bottom: 8px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 6px;
+
+    }
+
+
+    .translation-toggle {
+
+      background: #558b2f;
+
+      font-size: 15px;
+
+      padding: 8px 14px;
+
+      margin: 0;
+    }
+
+
+    .translation-toggle.english {
+
+      background: #1976d2;
+
+    }
+
+
+    .translation {
+
+      display: none;
+
+      margin: 8px 0 18px;
+
+      padding: 12px 16px;
+
+      border-radius: 10px;
+
+      line-height: 1.8;
+
+      font-size: 19px;
+
+      text-indent: 0;
+    }
+
+
+    .translation.vietnamese {
+
+      background: #f1f8f2;
+
+      border-left: 4px solid #66bb6a;
+
+    }
+
+
+
+
+    .translation.english {
+
+      background: #eef6ff;
+
+      border-left: 4px solid #42a5f5;
+
+    }
+
+
+
+    .translation.show {
+
+      display: block;
+
+    }
+
+
+
+    .translation-label {
+
+      font-weight: bold;
+
+      display: block;
+
+      margin-bottom: 5px;
+
+    }
+
+
+
+
+    /* =========================
+       FLASHCARD
+    ========================= */
+
+    .flashcard {
+
+      width: 300px;
+
+      height: 200px;
+
+      margin: 30px auto;
+
+      background: white;
+
+      border: 2px solid #a5d6a7;
+
+      border-radius: 15px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 4px 12px rgba(0,0,0,0.1);
+
+      transition: transform 0.2s;
+
+    }
+
+
+    .flashcard:hover {
+
+      transform: scale(1.02);
+
+    }
+
+
+    .card-front {
+
+      text-align: center;
+
+      width: 100%;
+
+    }
+
+
+    #kanji {
+
+      font-size: 70px;
+
+    }
+
+
+    .card-back {
+
+      text-align: center;
+
+      width: 90%;
+
+      display: none;
+
+    }
+
+
+    #cardHiragana {
+
+      font-size: 32px;
+
+      color: #2e7d32;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    #meaning {
+
+      font-size: 20px;
+
+      color: #333;
+
+      line-height: 1.6;
+
+    }
+
+
+    /* =========================
+       LUYỆN VIẾT
+    ========================= */
+
+    .question {
+
+      font-size: 50px;
+
+      text-align: center;
+
+      margin: 20px;
+
+    }
+
+
+    input {
+
+      padding: 12px;
+
+      font-size: 20px;
+
+      width: 80%;
+
+      max-width: 700px;
+
+      display: block;
+
+      margin: 15px auto;
+
+      border: 2px solid #ddd;
+
+      border-radius: 8px;
+
+      box-sizing: border-box;
+
+    }
+
+
+    input:focus {
+
+      outline: none;
+
+      border-color: #2e7d32;
+
+    }
+
+
+    #vocabularyResult,
+    #paragraphResult {
+
+      margin-top: 15px;
+
+      font-size: 20px;
+
+      text-align: center;
+
+      min-height: 30px;
+
+    }
+
+
+    /* Đoạn văn mẫu */
+
+    .paragraph-question {
+
+      font-size: 22px;
+
+      line-height: 2;
+
+      text-indent: 1.5em;
+
+      text-align: left;
+
+      max-width: 900px;
+
+      margin: 20px auto;
+
+      padding: 15px;
+
+      background: #fff7f8;
+
+      border-radius: 10px;
+
+    }
+
+
+
+
+
+   /* =========================
+       LUYỆN VIẾT ĐOẠN VĂN - Ô NHẬP VÀ BÁO LỖI
+    ========================= */
+
+    textarea {
+
+	width: 100%;
+
+	min-height: 220px;
+
+	box-sizing: border-box;
+
+	padding: 15px;
+
+	font-size: 22px;
+
+	line-height: 1.8;
+
+	border: 2px solid #a5d6a7;
+
+	border-radius: 10px;
+
+	resize: vertical;
+
+	font-family: MS PGothic, sans-serif;
+
+	display: block;
+
+	margin: 15px auto;
+
+    }
+
+
+     textarea:focus,
+
+     input[type="text"]:focus {
+
+	outline: none;
+
+	border-color: #2e7d32;
+
+    }
+
+
+	.result {
+
+	  margin-top: 20px;
+
+	  font-size: 24px;
+
+	}
+
+
+	.error-display {
+
+	  margin-top: 20px;
+
+	  padding: 15px;
+
+	  border: 1px solid #a5d6a7;
+
+	  border-radius: 10px;
+
+	  background: #f1f8f2;
+
+	  font-size: 22px;
+
+	  line-height: 1.8;
+
+	  white-space: pre-wrap;
+
+	  word-break: break-word;
+
+	}
+
+
+	.correct-char {
+
+	  color: #222;
+
+	}
+
+
+	.wrong-char {
+
+	  color: red;
+
+	  font-weight: bold;
+
+	  text-decoration: underline;
+
+	  background: #ffe5e5;
+
+	}
+
+
+	.missing-char {
+
+	  color: red;
+
+	  font-weight: bold;
+
+	  background: #ffe5e5;
+
+	  padding: 0 2px;
+
+	}
+
+
+	.error-note {
+
+	  margin-top: 8px;
+
+	  color: #c00;
+
+	  font-size: 16px;
+
+	}
+
+
+	.hidden {
+
+	  display: none;
+
+	}
+
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .japanese-app {
+
+        padding: 25px 20px 40px;
+
+      }
+
+
+      section {
+
+        padding: 18px;
+
+      }
+
+
+      .japanese-text {
+
+        font-size: 20px;
+
+      }
+
+
+      body {
+
+        padding: 0;
+
+      }
+
+
+      textarea {
+
+        font-size: 19px;
+
+      }
+
+
+      error-display {
+
+        font-size: 19px;
+
+      }
+
+
+      .question {
+
+        font-size: 40px;
+
+      }
+
+
+      .paragraph-question {
+
+        font-size: 19px;
+
+      }
+
+
+      .flashcard {
+
+        width: 270px;
+
+        height: 190px;
+
+      }
+
+
+      .translation {
+
+        font-size: 18px;
+
+      }
+
+
+      .translation-toggle {
+
+        font-size: 14px;
+
+        padding: 8px 12px;
+
+      }
+
+
+    }
+
+/* ===== HIỆU ỨNG PHÁO HOA KHI TRẢ LỜI ĐÚNG ===== */
+
+#fireworks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+
+.firework-particle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  opacity: 1;
+  animation: firework-explode 1s ease-out forwards;
+}
+
+
+@keyframes firework-explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.2);
+    opacity: 0;
+
+  }
+}
+
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <!-- Lớp phủ dùng cho hiệu ứng pháo hoa -->
+
+  <div id="fireworks" aria-hidden="true"></div>
+
+
+<div class="japanese-app">
+
+
+  <!-- =========================
+       TIÊU ĐỀ
+  ========================= -->
+
+  <h1>Học tiếng Nhật qua sách</h1>
+
+  <p class="subtitle">
+    Đọc hiểu đoạn văn • Học Từ vựng • Flashcard • Luyện viết
+  </p>
+
+
+  <!-- =========================
+       ĐỌC ĐOẠN VĂN
+  ========================= -->
+
+  <section>
+
+    <h2>Luyện đọc đoạn văn</h2>
+
+    <p class="subtitle">
+       ストレスをためやすい方ですか？お勧めのストレス解消法は？
+    </p>
+
+
+    <button
+      id="furiganaButton"
+      onclick="toggleFurigana()">
+
+      ふりがな ON
+
+    </button>
+
+
+
+
+    <div
+      id="readingText"
+      class="japanese-text">
+
+
+        <!-- =========================
+             ĐOẠN 1
+        ========================= -->
+
+    <div class="reading-paragraph">
+
+      <p class="japanese-paragraph">
+
+        私は知らず知らずストレスをため込みがちです。
+        そうすると一度に多くのストレスに
+
+        <ruby>
+          対処
+          <rt>たいしょ</rt>
+        </ruby>
+
+        しなければならなくなるので大変です。
+        その
+
+        <ruby>
+          兆候
+          <rt>ちょうこう</rt>
+        </ruby>
+
+        に早く気づくことをいまなお学んでいます。
+
+      </p>
+
+
+          <!-- Nút dịch -->
+
+          <div class="translation-controls">
+
+            <button
+
+              class="translation-toggle"
+
+              onclick="toggleTranslation('vi-1', this)">
+
+               Tiếng Việt ▼
+
+            </button>
+
+
+
+            <button
+
+              class="translation-toggle english"
+
+              onclick="toggleTranslation('en-1', this)">
+
+               English ▼
+
+            </button>
+
+
+          </div>
+
+
+          <!-- Bản dịch tiếng Việt -->
+
+
+          <div
+
+            id="vi-1"
+
+            class="translation vietnamese">
+
+
+            <span class="translation-label">
+
+               Tiếng Việt
+
+            </span>
+
+            Tôi thường có xu hướng tích tụ căng thẳng
+            mà không hề nhận ra.
+            Khi đó, tôi sẽ phải xử lý một lượng lớn
+            căng thẳng cùng một lúc nên rất khó khăn.
+            Tôi vẫn đang học cách sớm nhận ra những dấu hiệu đó.
+
+          </div>
+
+
+
+          <!-- Bản dịch tiếng Anh -->
+
+
+          <div
+
+            id="en-1"
+
+            class="translation english">
+
+
+            <span class="translation-label">
+
+               English
+
+            </span>
+
+
+            I tend to build up stress without even realizing it.
+            When that happens, I have to deal with a lot of stress
+            all at once, which makes things difficult.
+            I am still learning to recognize the signs early.
+
+          </div>
+
+
+        </div>
+
+
+
+
+        <!-- =========================
+             ĐOẠN 2
+        ========================= -->
+
+    <div class="reading-paragraph">
+
+      <p class="japanese-paragraph">
+
+        私が好きなストレス
+
+        <ruby>
+          解消法
+          <rt>かいしょうほう</rt>
+        </ruby>
+
+        は、
+
+        <ruby>
+          森林浴
+          <rt>しんりんよく</rt>
+        </ruby>
+
+        、
+
+        <ruby>
+          温泉
+          <rt>おんせん</rt>
+        </ruby>
+
+        <ruby>
+          巡り
+          <rt>めぐり</rt>
+        </ruby>
+
+        、歌を歌うことです。
+
+        山に行ければ
+
+        <ruby>
+          理想的
+          <rt>りそうてき</rt>
+        </ruby>
+
+        ですが、
+
+        <ruby>
+          都会
+          <rt>とかい</rt>
+        </ruby>
+
+        でも大きな公園には
+
+        <ruby>
+          木々
+          <rt>きぎ</rt>
+        </ruby>
+
+        がたくさんあります。
+
+        温泉もリラックスするのに良い方法です。
+
+        日本には素晴らしい温泉がたくさんあり、
+        私のお気に入りは
+
+        <ruby>
+          箱根
+          <rt>はこね</rt>
+        </ruby>
+
+        にあります。
+
+        歌を歌いたいときは、カラオケボックスに行きます。
+
+        <ruby>
+          運転中
+          <rt>うんてんちゅう</rt>
+        </ruby>
+
+        に一人で歌うのも楽しいのですが、
+        そうしていると、よく
+
+        <ruby>
+          道
+          <rt>みち</rt>
+        </ruby>
+
+        を
+
+        <ruby>
+          間違え
+          <rt>まちがえ</rt>
+        </ruby>
+
+        てしまいます。
+
+      </p>
+
+
+          <!-- Nút dịch -->
+
+          <div class="translation-controls">
+
+            <button
+
+              class="translation-toggle"
+
+              onclick="toggleTranslation('vi-2', this)">
+
+               Tiếng Việt ▼
+
+            </button>
+
+
+
+            <button
+
+              class="translation-toggle english"
+
+              onclick="toggleTranslation('en-2', this)">
+
+               English ▼
+
+            </button>
+
+
+          </div>
+
+
+          <!-- Bản dịch tiếng Việt -->
+
+
+          <div
+
+            id="vi-2"
+
+            class="translation vietnamese">
+
+
+            <span class="translation-label">
+
+               Tiếng Việt
+
+            </span>
+
+            Những phương pháp giải tỏa căng thẳng mà tôi thích là tắm rừng, đi tham quan các suối nước nóng và hát.
+            Nếu có thể đi lên núi thì thật lý tưởng, nhưng ngay cả ở thành phố, những công viên lớn
+            cũng có rất nhiều cây cối.
+            Suối nước nóng cũng là một cách rất tốt để thư giãn.
+            Nhật Bản có rất nhiều suối nước nóng tuyệt vời, và nơi tôi yêu thích nằm ở Hakone.
+            Khi muốn hát, tôi sẽ đến phòng karaoke.
+            Hát một mình khi đang lái xe cũng rất vui, nhưng nếu làm như vậy thì tôi thường bị nhầm đường.
+
+
+          </div>
+
+
+
+          <!-- Bản dịch tiếng Anh -->
+
+
+          <div
+
+            id="en-2"
+
+            class="translation english">
+
+
+            <span class="translation-label">
+
+               English
+
+            </span>
+
+
+            My favorite ways to relieve stress are forest bathing, visiting hot springs, and singing.
+            It would be ideal if I could go to the mountains, but even in the city, 
+	    large parks have plenty of trees.
+
+            Hot springs are also a good way to relax.
+            Japan has many wonderful hot springs,
+            and my favorite one is in Hakone.
+            When I want to sing, I go to a karaoke box.
+            Singing alone while driving is also fun, but when I do that, I often take the wrong road.
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             ĐOẠN 3
+        ========================= -->
+
+    <div class="reading-paragraph">
+
+      <p class="japanese-paragraph">
+
+        <ruby>
+          全体的
+          <rt>ぜんたいてき</rt>
+        </ruby>
+
+        に、これらの活動は私が何とかストレス
+
+        <ruby>
+          処理
+          <rt>しょり</rt>
+        </ruby>
+
+        するのに
+
+        <ruby>
+          役立
+          <rt>やくだ</rt>
+        </ruby>
+
+        っています。
+
+        <ruby>
+          自然
+          <rt>しぜん</rt>
+        </ruby>
+
+        の中にいたり、温泉に
+
+        <ruby>
+          浸
+          <rt>つ</rt>
+        </ruby>
+
+        かったり、心を込めて歌ったりすることで、
+        心がほぐれて
+
+        <ruby>
+          気分
+          <rt>きぶん</rt>
+        </ruby>
+
+        が良くなります。
+
+      </p>
+
+
+          <!-- Nút dịch -->
+
+          <div class="translation-controls">
+
+            <button
+
+              class="translation-toggle"
+
+              onclick="toggleTranslation('vi-3', this)">
+
+               Tiếng Việt ▼
+
+            </button>
+
+
+
+            <button
+
+              class="translation-toggle english"
+
+              onclick="toggleTranslation('en-3', this)">
+
+               English ▼
+
+            </button>
+
+
+          </div>
+
+
+          <!-- Bản dịch tiếng Việt -->
+
+
+          <div
+
+            id="vi-3"
+
+            class="translation vietnamese">
+
+
+            <span class="translation-label">
+
+               Tiếng Việt
+
+            </span>
+
+            Nhìn chung, những hoạt động này giúp tôi bằng cách nào đó xử lý căng thẳng.
+            Khi ở giữa thiên nhiên, ngâm mình trong suối nước nóng
+            hoặc hát bằng cả tấm lòng, tâm trí tôi được thư giãn và tâm trạng trở nên tốt hơn.
+
+
+
+          </div>
+
+
+
+          <!-- Bản dịch tiếng Anh -->
+
+
+          <div
+
+            id="en-3"
+
+            class="translation english">
+
+
+            <span class="translation-label">
+
+               English
+
+            </span>
+
+
+            Overall, these activities help me manage my stress in one way or another.
+            Being in nature, soaking in a hot spring, or singing wholeheartedly helps me relax
+            and improves my mood.
+
+          </div>
+
+
+        </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FLASHCARD
+  ========================= -->
+
+  <section>
+
+    <h2>Flashcard</h2>
+
+
+    <div
+      class="flashcard"
+      onclick="flipCard()">
+
+
+      <!-- Mặt trước -->
+
+      <div
+        id="cardFront"
+        class="card-front">
+
+        <div id="kanji"></div>
+
+      </div>
+
+
+      <!-- Mặt sau -->
+
+      <div
+        id="cardBack"
+        class="card-back">
+
+        <div id="cardHiragana"></div>
+
+        <div id="meaning"></div>
+
+      </div>
+
+
+    </div>
+
+
+    <div style="text-align:center;">
+
+      <button onclick="nextCard()">
+        Thẻ tiếp theo →
+      </button>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- =========================
+       LUYỆN VIẾT TỪ VỰNG
+  ========================= -->
+
+  <section>
+
+    <h2>✍️ Luyện viết từ vựng</h2>
+
+
+    <div
+      id="vocabularyQuestion"
+      class="question">
+    </div>
+
+
+    <input
+      type="text"
+      id="vocabularyAnswer"
+      placeholder="Nhập Hiragana..."
+      aria-label="Nhập Hiragana"
+      autocomplete="off">
+
+
+    <div style="text-align:center;">
+
+      <button onclick="checkVocabulary()">
+        Kiểm tra
+      </button>
+
+
+      <button onclick="nextVocabulary()">
+        Từ tiếp theo →
+      </button>
+
+    </div>
+
+
+    <div id="vocabularyResult"></div>
+
+
+  </section>
+
+
+  <!-- =========================
+       LUYỆN VIẾT ĐOẠN VĂN
+  ========================= -->
+
+  <section>
+
+    <h2>✍️ Luyện viết đoạn văn</h2>
+
+    <p>
+    Hãy nhập lại chính xác 100% đoạn văn dưới đây.
+    Sai một chữ, thiếu một chữ, thừa một chữ hoặc sai dấu câu đều được tính là sai.
+    </p>
+
+    <div class="japanese-text">
+
+    <p>
+      私は知らず知らずストレスをため込みがちです。そうすると一度に多くのストレスに対処しなければならなくなるので大変です。その兆候に早く気づくことをいまなお学んでいます。
+    </p>
+
+    </div>
+
+
+<!--
+  Ô nhập đoạn văn.
+
+  textarea cho phép nhìn thấy nhiều dòng cùng lúc.
+
+-->
+
+<textarea
+
+  id="paragraphInput"
+
+  placeholder="Nhập lại đoạn văn tại đây..."
+ 
+  aria-label="Nhập lại đoạn văn tại đây"
+
+  spellcheck="false"
+
+></textarea>
+
+
+<br>
+
+<button onclick="checkParagraph()">
+Kiểm tra
+</button>
+
+<button onclick="clearParagraph()">
+Xóa
+</button>
+
+<div
+
+  id="paragraphResult"
+
+  class="result">
+
+</div>
+
+
+
+<div
+
+  id="paragraphErrorBox"
+
+  class="error-display hidden">
+
+</div>
+
+
+
+<div
+
+  id="paragraphErrorNote"
+
+  class="error-note hidden">
+
+</div>
+
+
+</section>
+
+</div>
+
+
+<script>
+
+
+
+/* =========================
+   FURIGANA ON / OFF
+========================= */
+
+let furiganaVisible = true;
+
+
+function toggleFurigana() {
+
+  const text =
+    document.getElementById("readingText");
+
+  const button =
+    document.getElementById("furiganaButton");
+
+
+  if (furiganaVisible) {
+
+    text.classList.add("hide-furigana");
+
+    button.innerText =
+      "ふりがな OFF";
+
+    furiganaVisible = false;
+
+  } else {
+
+    text.classList.remove("hide-furigana");
+
+    button.innerText =
+      "ふりがな ON";
+
+    furiganaVisible = true;
+
+  }
+
+}
+
+
+
+/* =========================
+    BẬT / TẮT BẢN DỊCH
+========================= */
+
+    function toggleTranslation(
+      translationId,
+      button
+
+    ) {
+
+
+      const translation =
+        document.getElementById(
+          translationId
+        );
+
+
+
+      if (!translation) return;
+
+      const isVisible =
+        translation.classList.toggle("show");
+
+
+      /*
+        Đổi ký hiệu ▼ / ▲
+        để người đọc biết bản dịch
+        đang đóng hay mở.
+      */
+
+
+      if (translationId.startsWith("vi-")) {
+
+        button.innerText =
+          isVisible
+            ? " Tiếng Việt ▲"
+            : " Tiếng Việt ▼";
+
+
+      } else {
+
+        button.innerText =
+          isVisible
+            ? " English ▲"
+            : " English ▼";
+
+      }
+
+
+    }
+
+
+
+/* =========================
+   FLASHCARD
+========================= */
+
+const flashcards = [
+
+  {
+    kanji: "兆候",
+    hiragana: "ちょうこう",
+    meaning: "triệu chứng, dấu hiệu"
+  },
+
+  {
+    kanji: "森林浴",
+    hiragana: "しんりんよく",
+    meaning: "hòa mình vào thiên nhiên"
+  },
+
+  {
+    kanji: "温泉",
+    hiragana: "おんせん",
+    meaning: "suối nước nóng"
+  },
+
+  {
+    kanji: "木々",
+    hiragana: "きぎ",
+    meaning: "cây cối"
+  },
+
+  {
+    kanji: "箱根",
+    hiragana: "はこね",
+    meaning:
+      "Hakone - một địa danh du lịch nổi tiếng nằm ở tỉnh Kanagawa, nổi tiếng với các suối nước nóng thiên nhiên"
+  },
+
+  {
+    kanji: "運転中",
+    hiragana: "うんてんちゅう",
+    meaning: "đang lái xe"
+  },
+
+  {
+    kanji: "処理",
+    hiragana: "しょり",
+    meaning: "xử lý"
+  },
+
+  {
+    kanji: "役立つ",
+    hiragana: "やくだつ",
+    meaning: "có ích, hữu ích"
+  },
+
+  {
+    kanji: "浸かる",
+    hiragana: "つかる",
+    meaning: "ngâm mình, ngâm trong nước"
+  },
+
+  {
+    kanji: "ほぐれる",
+    hiragana: "ほぐれる",
+    meaning: "được xoa dịu"
+  },
+
+  {
+    kanji: "気分",
+    hiragana: "きぶん",
+    meaning: "tâm trạng, cảm giác"
+  }
+
+];
+
+
+let currentCard = 0;
+
+let cardFlipped = false;
+
+
+
+/* Hiển thị flashcard */
+
+function showCard() {
+
+  const card =
+    flashcards[currentCard];
+
+
+  document.getElementById("kanji").innerText =
+    card.kanji;
+
+
+  document.getElementById("cardHiragana").innerText =
+    card.hiragana;
+
+
+  document.getElementById("meaning").innerText =
+    card.meaning;
+
+
+  document.getElementById("cardFront").style.display =
+    "block";
+
+
+  document.getElementById("cardBack").style.display =
+    "none";
+
+
+  cardFlipped = false;
+
+}
+
+
+
+/* Lật flashcard */
+
+function flipCard() {
+
+  const front =
+    document.getElementById("cardFront");
+
+  const back =
+    document.getElementById("cardBack");
+
+
+  if (cardFlipped) {
+
+    front.style.display = "block";
+
+    back.style.display = "none";
+
+    cardFlipped = false;
+
+  } else {
+
+    front.style.display = "none";
+
+    back.style.display = "block";
+
+    cardFlipped = true;
+
+  }
+
+}
+
+
+
+/* Thẻ tiếp theo */
+
+function nextCard() {
+
+  currentCard++;
+
+
+  if (currentCard >= flashcards.length) {
+
+    currentCard = 0;
+
+  }
+
+
+  showCard();
+
+}
+
+
+
+/* Hiển thị thẻ đầu tiên */
+
+showCard();
+
+
+
+/* =========================
+   LUYỆN VIẾT TỪ VỰNG
+========================= */
+
+const vocabularyQuestions = [
+
+  {
+    question: "兆候",
+    answer: "ちょうこう"
+  },
+
+  {
+    question: "森林浴",
+    answer: "しんりんよく"
+  },
+
+  {
+    question: "温泉",
+    answer: "おんせん"
+  },
+
+  {
+    question: "木々",
+    answer: "きぎ"
+  },
+
+  {
+    question: "箱根",
+    answer: "はこね"
+  },
+
+  {
+    question: "運転中",
+    answer: "うんてんちゅう"
+  },
+
+  {
+    question: "処理",
+    answer: "しょり"
+  },
+
+  {
+    question: "役立つ",
+    answer: "やくだつ"
+  },
+
+  {
+    question: "浸かる",
+    answer: "つかる"
+  },
+
+  {
+    question: "ほぐれる",
+    answer: "ほぐれる"
+  },
+
+  {
+    question: "気分",
+    answer: "きぶん"
+  }
+
+];
+
+
+let currentVocabulary = 0;
+
+
+
+/* Hiển thị câu hỏi từ vựng */
+
+function showVocabularyQuestion() {
+
+  document.getElementById(
+    "vocabularyQuestion"
+  ).innerText =
+    vocabularyQuestions[currentVocabulary].question;
+
+
+  document.getElementById(
+    "vocabularyAnswer"
+  ).value = "";
+
+
+  document.getElementById(
+    "vocabularyResult"
+  ).innerText = "";
+
+}
+
+
+
+/* Kiểm tra từ vựng */
+
+function checkVocabulary() {
+
+  const input =
+    document.getElementById(
+      "vocabularyAnswer"
+    ).value.trim();
+
+
+  const correctAnswer =
+    vocabularyQuestions[currentVocabulary].answer;
+
+
+  const result =
+    document.getElementById(
+      "vocabularyResult"
+    );
+
+
+  if (input === correctAnswer) {
+
+    result.innerHTML =
+      "<strong> Chính xác!</strong>";
+
+    launchFireworks();
+
+
+  } else {
+
+    result.innerHTML =
+      "<strong> Chưa chính xác. Hãy thử lại!</strong>";
+
+  }
+
+}
+
+
+document.getElementById("vocabularyAnswer").addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key === "Enter") {
+
+      event.preventDefault();
+
+      checkVocabulary();
+    }
+
+  }
+);
+
+
+
+/* Từ tiếp theo */
+
+function nextVocabulary() {
+
+  currentVocabulary++;
+
+
+  if (
+    currentVocabulary >=
+    vocabularyQuestions.length
+  ) {
+
+    currentVocabulary = 0;
+
+  }
+
+
+  showVocabularyQuestion();
+
+}
+
+
+
+/* Hiển thị câu hỏi đầu tiên */
+
+showVocabularyQuestion();
+
+
+
+/* =========================
+   LUYỆN VIẾT ĐOẠN VĂN
+========================= */
+
+const paragraphAnswer =
+"私は知らず知らずストレスをため込みがちです。そうすると一度に多くのストレスに対処しなければならなくなるので大変です。その兆候に早く気づくことをいまなお学んでいます。";
+
+
+/*
+  Hàm này so sánh từng ký tự.
+*/
+
+function createErrorDisplay(
+  input,
+  answer
+) {
+
+
+  /*
+    So sánh theo chuỗi ký tự bằng LCS.
+    Cách này giúp khi người học thiếu/thừa một ký tự
+    ở giữa câu, các ký tự phía sau không bị báo sai hàng loạt.
+  */
+
+
+  const a = Array.from(input);
+
+  const b = Array.from(answer);
+
+
+  const dp = Array.from(
+
+    { length: a.length + 1 },
+
+    () => Array(b.length + 1).fill(0)
+
+  );
+
+
+
+  for (let i = a.length - 1; i >= 0; i--) {
+    for (let j = b.length - 1; j >= 0; j--) {
+
+
+
+      if (a[i] === b[j]) {
+        dp[i][j] = dp[i + 1][j + 1] + 1;
+      } else {
+        dp[i][j] = Math.max(
+          dp[i + 1][j],
+          dp[i][j + 1]
+        );
+      }
+
+
+    }
+  }
+
+
+  let i = 0;
+  let j = 0;
+  let html = "";
+  let errorCount = 0;
+
+
+  while (i < a.length || j < b.length) {
+
+
+    if (
+
+      i < a.length &&
+      j < b.length &&
+      a[i] === b[j]
+    ) {
+
+      if (a[i] === " ") {
+        html += " ";
+      } else {
+        html +=
+          '<span class="correct-char">' +
+          escapeHtml(a[i]) +
+          '</span>';
+      }
+
+
+      i++;
+      j++;
+      continue;
+    }
+
+
+
+    /*
+      Nếu bỏ ký tự hiện tại của đáp án thì vẫn giữ được
+      chuỗi khớp dài hơn, coi đó là ký tự bị thiếu.
+    */
+
+    if (
+      j < b.length &&
+      (
+        i >= a.length ||
+        dp[i][j + 1] >= dp[i + 1][j]
+      )
+    ) {
+
+
+
+      errorCount++;
+
+      html +=
+        '<span class="missing-char" title="Thiếu ký tự">' +
+        escapeHtml(b[j]) +
+        '</span>';
+
+
+      j++;
+      continue;
+    }
+
+
+    /*
+      Ký tự người học nhập nhưng không khớp:
+      đánh dấu là sai/thừa.
+    */
+
+    if (i < a.length) {
+
+
+      errorCount++;
+
+
+
+      html +=
+
+        '<span class="wrong-char" title="Ký tự sai hoặc thừa">' +
+        escapeHtml(a[i]) +
+        '</span>';
+
+
+      i++;
+      continue;
+    }
+
+
+    if (j < b.length) {
+
+
+
+      errorCount++;
+
+
+
+      html +=
+        '<span class="missing-char" title="Thiếu ký tự">' +
+        escapeHtml(b[j]) +
+        '</span>';
+
+
+      j++;
+    }
+  }
+
+
+
+  return {
+
+    html: html,
+
+    errorCount: errorCount
+
+  };
+
+}
+
+
+/*
+  Bảo vệ HTML để người dùng nhập ký tự đặc biệt
+  mà không làm hỏng giao diện.
+*/
+
+function escapeHtml(text) {
+
+  return text
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/*
+  Nút KIỂM TRA
+*/
+
+function checkParagraph() {
+
+  const textarea =
+    document.getElementById(
+      "paragraphInput"
+    );
+
+  const result =
+    document.getElementById(
+      "paragraphResult"
+    );
+
+  const errorBox =
+    document.getElementById(
+      "paragraphErrorBox"
+    );
+
+  const errorNote =
+    document.getElementById(
+      "paragraphErrorNote"
+    );
+
+
+  /*
+    Chỉ bỏ khoảng trắng ở đầu và cuối.
+
+    Khoảng trắng ở bên trong vẫn được kiểm tra.
+  */
+
+  const input =
+    textarea.value.trim();
+
+
+  /*
+    Đúng 100%
+  */
+
+  if (
+    input === paragraphAnswer
+  ) {
+
+    result.innerHTML =
+      "<strong> Chính xác100%!</strong>";
+
+    launchFireworks();
+
+    errorBox.classList.add(
+      "hidden"
+    );
+
+    errorNote.classList.add(
+      "hidden"
+    );
+
+    return;
+  }
+
+
+  /*
+    Có lỗi
+  */
+
+  const errorData =
+    createErrorDisplay(
+      input,
+      paragraphAnswer
+    );
+
+
+  result.innerHTML =
+    "<strong> Chưa chính xác. Có " +
+    errorData.errorCount +
+    " vị trí cần kiểm tra.</strong>";
+
+
+  errorBox.innerHTML =
+    errorData.html;
+
+
+  errorBox.classList.remove(
+    "hidden"
+  );
+
+
+  errorNote.innerText =
+    "⚠️ Màu đỏ = ký tự sai hoặc vị trí bị thiếu. Hãy sửa trực tiếp trong ô nhập phía trên rồi bấm Kiểm tra lại.";
+
+
+  errorNote.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+/*
+  Nút XÓA
+*/
+
+function clearParagraph() {
+
+  document.getElementById(
+    "paragraphInput"
+  ).value = "";
+
+  document.getElementById(
+    "paragraphResult"
+  ).innerText = "";
+
+  document.getElementById(
+    "paragraphErrorBox"
+  ).classList.add(
+    "hidden"
+  );
+
+  document.getElementById(
+    "paragraphErrorNote"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+// ===== PHÁO HOA KHI ĐÁP ÁN CHÍNH XÁC =====
+function launchFireworks() {
+  const container = document.getElementById("fireworks");
+  if (!container) return;
+
+
+  const colors = ["#4caf50", "#ff9800", "#f44336", "#2196f3", "#9c27b0", "#ffeb3b"];
+
+
+  const centers = [
+    { x: 25 + Math.random() * 15, y: 25 + Math.random() * 20 },
+    { x: 50 + Math.random() * 15, y: 20 + Math.random() * 20 },
+    { x: 70 + Math.random() * 15, y: 30 + Math.random() * 20 }
+  ];
+
+
+  centers.forEach(center => {
+    for (let i = 0; i < 28; i++) {
+      const particle = document.createElement("div");
+      particle.className = "firework-particle";
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 50 + Math.random() * 100;
+      const size = 7 + Math.random() * 5;
+
+      particle.style.width = size + "px";
+      particle.style.height = size + "px";
+      particle.style.left = center.x + "vw";
+      particle.style.top = center.y + "vh";
+      particle.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+      particle.style.setProperty("--dx", Math.cos(angle) * distance + "px");
+      particle.style.setProperty("--dy", Math.sin(angle) * distance + "px");
+
+
+      container.appendChild(particle);
+
+
+      setTimeout(() => {
+        particle.remove();
+      }, 1100);
+    }
+  });
+}
+
+
+</script>
+
+</body>
+</html>

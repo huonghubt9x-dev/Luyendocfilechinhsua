@@ -17,9 +17,16 @@
        CÀI ĐẶT CHUNG
     ========================= */
 
+    /* =========================
+       TỐI ƯU CHO GOOGLE SITES / EMBED
+       Không ép html/body cao 100%; để chiều cao
+       của trang co theo đúng nội dung thực tế.
+    ========================= */
+
     html {
       width: 100%;
-      min-height: 100%;
+      height: auto;
+      min-height: 0;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
@@ -28,18 +35,22 @@
       -ms-overflow-style: none;
     }
 
-
     html::-webkit-scrollbar {
       display: none;
       width: 0;
       height: 0;
     }
 
-	  body {
+    body {
       width: 100%;
-      min-height: 100%;
-	  margin: 0;
+      height: auto;
+      min-height: 0;
+      margin: 0;
       padding: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
 
       background: #f1f8f2;
 
@@ -47,21 +58,15 @@
         Arial,
         "MS PGothic",
         "Hiragino Kaku Gothic ProN",
-	"Segoe UI Emoji", 
-	"Wingdings", 
-	"Noto Color Emoji", 
+        "Segoe UI Emoji",
+        "Wingdings",
+        "Noto Color Emoji",
         sans-serif;
 
       color: #222;
     }
 
-      overflow-x: hidden;
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-	body::-webkit-scrollbar {
+    body::-webkit-scrollbar {
       display: none;
       width: 0;
       height: 0;
@@ -73,7 +78,7 @@
       width: 100%;
       max-width: none;
       margin: 0;
-      padding: 30px 20px 60px;
+      padding: 30px 20px 20px;
       box-sizing: border-box;
     }
 
@@ -685,7 +690,7 @@
     @media (max-width: 900px) {
 
       .japanese-app {
-        padding: 25px 18px 50px;
+        padding: 25px 18px 15px;
       }
 
       section {
@@ -715,10 +720,20 @@
     }
 
 
+    /* Tablet / iPad: giảm phần đệm đáy của nội dung nhúng. */
+    @media (min-width: 601px) and (max-width: 1100px) {
+
+      .japanese-app {
+        padding-bottom: 10px;
+      }
+
+    }
+
+
     @media (max-width: 600px) {
 
       .japanese-app {
-        padding: 20px 12px 35px;
+        padding: 20px 12px 12px;
       }
 
       section {

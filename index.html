@@ -2344,14 +2344,14 @@ function launchFireworks() {
   // Lấy vị trí thật của khu vực người học vừa trả lời.
   // Dùng tọa độ của DOCUMENT thay vì tọa độ cố định của viewport.
 
-  let targetX = window.innerWidth / 2.5;
-  let targetY = window.scrollY + window.innerHeight / 2.5;
+  let targetX = window.innerWidth / 2;
+  let targetY = window.scrollY + window.innerHeight / 2;
 
   if (targetElement) {
     const rect = targetElement.getBoundingClientRect();
 
-    targetX = rect.left + rect.width / 2.5 + window.scrollX;
-    targetY = rect.top + rect.height / 2.5 + window.scrollY;
+    targetX = rect.left + rect.width / 2 + window.scrollX;
+    targetY = rect.top + rect.height / 2 + window.scrollY;
   }
 
 
@@ -2399,12 +2399,6 @@ function launchFireworks() {
 
 
       container.appendChild(particle);
-
-
-      /* Buộc trình duyệt nhận phần tử trước khi animation chạy,
-         giúp hiệu ứng ổn định hơn khi nằm trong iframe. */
-
-      void particle.offsetWidth;
 
 
       setTimeout(() => {
